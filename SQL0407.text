@@ -1,1 +1,73 @@
+SELECT COUNT(salary) salary행수
+FROM employees;
+
+-- 행의 갯수를 세어낸다.
+
+---------------------------------------------
+
+SELECT SUM(salary) 합계, AVG(salary) 평균, SUM(salary)/COUNT(salary) 계산된평균
+FROM employees;
+
+-- salary 값들의 합
+-- salary 값들의 평균
+-- salary의 값과 salary의 갯수를 사용하여 계산한 평균값
+
+---------------------------------------------
+
+SELECT MAX(salary) 최댓값, MIN(salary)최솟값, MAX(first_name) 최대문자값, MIN(first_name) 최소문자값
+FROM employees;
+
+-- salary에서의 최댓값
+-- salary에서의 최솟값
+-- 문자도 최댓값과 최솟값을 구할 수 있다.
+-- 여기서 최대는 w 최소는 a 이다.
+
+---------------------------------------------
+
+SELECT job_id 직무, SUM(salary) 직무별_총급여, AVG(salary) 직무별_평균급여
+FROM employees
+WHERE employee_id >= 10
+GROUP BY job_id
+ORDER BY 직무별_총급여 DESC, 직무별_평균급여;
+
+
+-- job_id(직무별로) salay 의 총합 과 salay의 평균값을 나타낸다.
+-- employees 가 10 보다 크거나 같을때
+-- 직무로 묶어
+-- 총 급여는 내림차순으로 정렬한다.
+
+---------------------------------------------
+
+SELECT job_id job_id_대그룹, 
+        manager_id manager_id_중그룹,
+        SUM(salary) 그룹핑_총급여, 
+        AVG(salary) 그룹핑_평균급여
+FROM employees
+WHERE employee_id >= 10
+GROUP BY job_id, manager_id
+ORDER BY 그룹핑_총급여 DESC, 그룹핑_평균급여;
+
+-- manager_id 를 추가 하고 
+-- manager_id 로 급룹을 하나더 만든다.
+
+---------------------------------------------
+
+SELECT job_id 직무, 
+        SUM(salary) 직무별_총급여, 
+        AVG(salary) 직무별_평균급여
+FROM employees
+WHERE employee_id >= 10
+GROUP BY job_id
+HAVING SUM(salary) > 30000
+ORDER BY 직무별_총급여 DESC, 직무별_평균급여;
+
+-- HAVING 절은 결괏값에 대해 조건식을 적용한다.
+-- 직무별로 그룹을 묶는다.
+-- salay의 총합이 30000이 넘는 값만 보여주게 한다.
+
+---------------------------------------------
+
+
+
+
 
